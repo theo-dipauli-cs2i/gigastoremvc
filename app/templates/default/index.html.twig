@@ -1,0 +1,111 @@
+{% extends 'layout/master-layout.html.twig' %}
+
+{% block title %}Hello DefaultController!
+{% endblock %}
+
+{% block header %}
+	{% include "partials/carousel.html.twig" %}
+{% endblock %}
+
+{% block sidebar %}
+	{% include "partials/ofTheMounth.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<h1>Offres exceptionnelles</h1>
+	<div class="row ">
+		<main class="col-md-9">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptas numquam laboriosam doloribus modi illo minus, sequi placeat qui autem ipsum. Ea ipsum quaerat officia nesciunt eos quos voluptatum? Nisi, ut, illo at optio expedita harum voluptates rem deserunt facere ipsa reprehenderit voluptatum! Magnam saepe sint repudiandae ipsum reiciendis laboriosam.</p>
+			<p class="bg-primary bg-opacity-50 w-100 text-center  p-2">Promotions spéciales sur les
+				<strong>bandes dessinées</strong>, profitez-en !</p>
+		</main>
+		<aside class="col-md-3">
+			<img class="img-fluid d-none d-md-block" src="{{asset('images/charte/books.webp')}}" alt="">
+		</aside>
+	</div>
+	<hr>
+	<div class="row ">
+		<main class="col-md-6">
+			<h3>
+				<i class="bi bi-arrow-right-circle"></i>
+				Lorem</h3>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ipsum. Praesentium laudantium optio alias totam. Inventore eveniet iusto totam odit iure saepe voluptatem dolorum nesciunt libero, facilis, temporibus est dolorem ipsa commodi laborum hic, nulla reiciendis delectus? Atque cum, perspiciatis quibusdam numquam, dolores qui mollitia molestiae soluta quasi nisi excepturi.</p>
+		</main>
+		<aside class="col-md-6">
+			<h3>
+				<i class="bi bi-arrow-right-circle"></i>
+				Lorem</h3>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ipsum. Praesentium laudantium optio alias totam. Inventore eveniet iusto totam odit iure saepe voluptatem dolorum nesciunt libero, facilis, temporibus est dolorem ipsa commodi laborum hic, nulla reiciendis delectus? Atque cum, perspiciatis quibusdam numquam, dolores qui mollitia molestiae soluta quasi nisi excepturi.</p>
+
+		</aside>
+	</div>
+	<hr>
+	<div>
+		<h3>
+			<i class="bi bi-hand-thumbs-up"></i>
+			Voici quelques livres qui peuvent vous intéresser
+		</h3>
+		<div class="row row-cols-1 row-cols-md-4 g-4">
+			<div class="col">
+				<div class="card h-100">
+					<img src="{{asset('images/livres/medium/harry-potter-et-la-chambre-des-secrets.jpg')}}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<a href="#" class="text-decoration-none">Harry Potter et la chmabre des secrets</a>
+						<p>J. K. Rowling</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn btn-primary btn-sm text-decoration-none" role="button">
+							<i class="bi bi-arrow-bar-right"></i>
+							voir
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card h-100">
+					<img src="{{asset('images/livres/medium/pars-vite-et-reviens-tard.jpg')}}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<a href="#" class="text-decoration-none">Pars vite et reviens tard</a>
+						<p>Fred Vargas</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn btn-primary btn-sm text-decoration-none" role="button">
+							<i class="bi bi-arrow-bar-right"></i>
+							voir
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card h-100">
+					<img src="{{asset('images/livres/medium/le-feu-occulte.jpg')}}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<a href="#" class="text-decoration-none">Trolls de Troy: le feu occulte</a>
+						<p>Mourier / Arleston</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn btn-primary btn-sm text-decoration-none" role="button">
+							<i class="bi bi-arrow-bar-right"></i>
+							voir
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card h-100">
+					<img src="{{asset('images/livres/medium/hyperion-l-integrale.jpg')}}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<a href="#" class="text-decoration-none">Hyperion: l'intégrale</a>
+						<p>Dan Simmons</p>
+					</div>
+					<div class="card-footer">
+						<a href="#" class="btn btn-primary btn-sm text-decoration-none" role="button">
+							<i class="bi bi-arrow-bar-right"></i>
+							voir
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

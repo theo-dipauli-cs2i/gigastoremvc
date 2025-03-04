@@ -1,0 +1,52 @@
+{% set Menu = 
+    [
+        {title: 'Livres', icon: 'bi bi-book cursor-pointer', route: 'app_livres', position: 'left'},
+        {title: 'DVD', icon: 'bi bi-disc cursor-pointer', route: 'app_dvd', position: 'left'},
+        {title: 'Spectacles', icon: 'bi bi-ticket-perforated cursor-pointer', route: 'app_spectacles', position: 'left'},
+        {title: 'Informatique', icon: 'bi bi-laptop cursor-pointer', route: 'app_informatique', position: 'left'},
+        {title: 'Qui sommes-nous ?', icon: 'bi bi-info-circle cursor-pointer', route: 'app_about-us', position: 'right'},
+        {title: 'Contact', icon: 'bi bi-envelope cursor-pointer', route: 'app_contact', position: 'right'}
+    ]
+%}
+
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-body" href="{{path('app_index')}}">
+            <i class="bi bi-house cursor-pointer"></i> Accueil
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% for item in Menu %}
+                    {% if item.position == 'left' %}
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="{{ path(item.route) }}">
+                                <i class="{{ item.icon }}"></i> {{ item.title }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% for item in Menu %}
+                    {% if item.position == 'right' %}
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="{{ path(item.route) }}">
+                                <i class="{{ item.icon }}"></i> {{ item.title }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+</nav>
