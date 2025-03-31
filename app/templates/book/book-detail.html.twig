@@ -1,0 +1,73 @@
+{% extends 'layout/master-layout.html.twig' %}
+
+{% block title %}Spectacles - Gigastore
+{% endblock %}
+
+
+{% block sidebar %}
+	{% include "partials/ofTheMounth.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-8">
+			<h2>{{ livre.titre }}</h2>
+			<div class="table-responsive">
+				<table class="table table-striped w-75">
+					<tr>
+						<th>Référence</th>
+						<td>{{ livre.id }}</td>
+					</tr>
+					<tr>
+						<th>Auteur</th>
+						<td>
+							<strong>{{ livre.auteur }}</strong>
+						</td>
+					</tr>
+					<tr>
+						<th>Éditeur</th>
+						<td>
+							<strong>{{ livre.editeur }}</strong>
+						</td>
+					</tr>
+					<tr>
+						<th>Collection</th>
+						<td>
+							<strong>{{ livre.collection }}</strong>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<h4 class="mt-4">Résumé</h4>
+			<p>{{ livre.description }}</p>
+		</div>
+
+		<div class="col-md-4 ">
+			<div class="text-center">
+				<img src="{{ asset('images/livres/zooms/' ~ livre.photo) }}" class="img-fluid shadow-sm mb-3 text-center" alt="{{ livre.titre }}">
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Format</th>
+					<td>{{ livre.format }}</td>
+				</tr>
+				<tr>
+					<th>Pages</th>
+					<td>
+						<strong>{{ livre.pages }}</strong>
+					</td>
+				</tr>
+				<tr>
+					<th>Poids</th>
+					<td>{{ livre.poids }}
+						kg</td>
+				</tr>
+				<tr>
+					<th>Livraison</th>
+					<td>{{ livre.getDelaiDeLivraison() }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+{% endblock %}

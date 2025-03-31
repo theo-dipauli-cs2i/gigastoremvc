@@ -1,0 +1,33 @@
+{% extends 'layout/master-layout.html.twig' %}
+
+{% block title %}Spectacles - Gigastore
+{% endblock %}
+
+{% block sidebar %}
+	{% include "partials/ofTheMounth.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for livre in livres %}
+            <div class="col ">
+                <div class="card h-100 shadow-sm ">
+                    <img src="{{ asset('images/livres/medium/' ~ livre.photo) }}" class="card-img-top" alt="{{ livre.titre }}">
+                    <p class="text-primary m-2">{{ livre.titre }}</p>
+                    <div class="card-body">
+                        <p class="card-text">Auteur : <strong>{{ livre.auteur }}</strong></p>
+                        <hr>
+                        <p class="card-text">Éditeur : <strong>{{ livre.editeur }}</strong></p>
+                        <hr>
+                        <p class="card-text">Collection : <strong>{{ livre.collection }}</strong></p>
+                    </div>
+                    <div class="card-footer text-end">
+                        <a href="{{ path('app_detail_livre', { 'id': livre.id }) }}" class="btn btn-primary btn-sm" role="button">
+                            <p class="m-0">Prix ({{ livre.prix }}€)</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
