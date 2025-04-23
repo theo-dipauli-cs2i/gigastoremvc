@@ -12,6 +12,8 @@
 		<div class="row g-3">
 			<aside class="col-md-3 order-2 order-md-1">
 				{% block sidebar %}{% endblock %}
+				{% include "partials/ofTheMounth.html.twig" %}
+				{{ render(controller('App\\Controller\\BookController::nouveautes'))}}
 			</aside>
 			<main class="col-md-9 order-1 order-md-2 ">
 				{% block body %}{% endblock %}

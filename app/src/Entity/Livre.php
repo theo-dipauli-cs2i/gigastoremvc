@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -62,6 +64,17 @@ class Livre
     #[ORM\ManyToOne(inversedBy: 'livres')]
     #[ORM\JoinColumn(name: 'code_genre', referencedColumnName: 'code', nullable: false)]
     private ?Genre $code_genre = null;
+
+    /**
+     * @var Collection<int, Commentaire>
+     */
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'livreId')]
+    private Collection $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     public function getId(): ?string
     {
@@ -256,6 +269,36 @@ class Livre
     public function setCodeGenre(?Genre $code_genre): static
     {
         $this->code_genre = $code_genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setLivreId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getLivreId() === $this) {
+                $commentaire->setLivreId(null);
+            }
+        }
 
         return $this;
     }

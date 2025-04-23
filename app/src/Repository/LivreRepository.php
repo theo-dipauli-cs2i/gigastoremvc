@@ -40,4 +40,26 @@ class LivreRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByGenre(string $code_genre): array
+    {
+        return $this->createQueryBuilder('l')
+            ->join('l.code_genre', 'g')
+            ->where('g.code = :genre')
+            ->setParameter('genre', $code_genre)
+            ->orderBy('l.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    // public function findByNouveaute(): array
+    // {
+    //     return $this->createQueryBuilder('l')
+    //         ->where('l.nouveaute = 1')
+    //         ->orderBy('l.id', 'ASC')
+    //         ->setMaxResults(3)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 }

@@ -4,10 +4,6 @@
 {% endblock %}
 
 
-{% block sidebar %}
-	{% include "partials/ofTheMounth.html.twig" %}
-{% endblock %}
-
 {% block body %}
 	<div class="row">
 		<div class="col-md-8">
@@ -70,4 +66,21 @@
 			</table>
 		</div>
 	</div>
+	<h2>Commentaire des lecteurs</h2>
+	{% for commentaire in commentaires %}
+		<div class="bg-primary bg-opacity-50 w-100 text-center mt-3 p-2">
+			<div class="row">
+				<aside class="col-md-1 order-2 order-md-1">
+					<i class="bi bi-person-circle fs-2"></i>
+				</aside>
+				<main class="col-md-11 order-1 order-md-2 text-start ">
+					<p>Par {{commentaire.pseudonyme}}</p>
+					<hr>
+					<p>{{commentaire.commentaire}}</p>
+					<p class="small">Posté le {{ commentaire.dateCommentaire|date('d/m/Y') }}</p>
+
+				</main>
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}
