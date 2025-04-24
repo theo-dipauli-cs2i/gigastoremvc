@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Commentaire;
 use App\Entity\Genre;
 use App\Entity\Livre;
+use App\Form\CommentaireType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;   
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -23,24 +25,37 @@ final class BookController extends AbstractController
             $livres = $em->getRepository(Livre::class)->findAll();
         }
 
-
         return $this->render('book/catalog.html.twig', [
             'livres' => $livres,
             'genre_actuel' => $genre_actuel,
             'genres' => $genres,
+            
         ]);
     }
 
 
     #[Route('/detail-livre/{id}', name: 'app_detail_livre')]
-    public function detailLivre(EntityManagerInterface $em, $id): Response
+    public function detailLivre(EntityManagerInterface $em,Request $request, $id): Response
     {
         $livre = $em->getRepository(Livre::class)->find($id);
         $commentaires = $em->getRepository(Commentaire::class)->findCommentaire($id);
-        
+
+        $commentaire = new Commentaire();
+        $formulaire = $this->createForm(CommentaireType::class,data: $commentaire);
+        $formulaire->handleRequest($request);
+
+        if ($formulaire->isSubmitted() and $formulaire->isValid()){
+            $commentaire->setDateCommentaire(new \DateTimeImmutable());
+            $commentaire->setLivreId($livre);
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('app_detail_livre', ['id' => $id]);
+    }
+
         return $this->render('book/book-detail.html.twig', [
             'livre' => $livre,
-            'commentaires' => $commentaires
+            'commentaires' => $commentaires,
+            'vueFormulaire' => $formulaire->createView()
         ]);
     }
 
