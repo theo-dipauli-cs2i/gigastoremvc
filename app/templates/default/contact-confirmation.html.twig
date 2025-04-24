@@ -1,0 +1,24 @@
+{% extends 'layout/master-layout.html.twig' %}
+
+{% block title %}Spectacles - Gigastore
+{% endblock %}
+
+{% block header %}
+	{% include "partials/carousel.html.twig" %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="card p-3">
+		<div class="card-body text-center">
+			<h1>Merci de votre message !</h1>
+		</div>
+	</div>
+	<p>Nous avons pris note de votre message, il sera traité au plus vite</p>
+		<p>Voici les informations transmises:</p>
+		<ul>
+			<li>{{ nom }}</li>
+			<li>{{ email }}</li>
+			<li>{{ message }}</li>
+		</ul>
+{% endblock %}

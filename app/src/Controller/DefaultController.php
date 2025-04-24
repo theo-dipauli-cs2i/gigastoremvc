@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class DefaultController extends AbstractController
@@ -46,11 +50,37 @@ final class DefaultController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function contact(Request $request, SessionInterface $session): Response
     {
+        $donnees = [];
+        $formulaire = $this->createForm(ContactType::class, data: $donnees);
+        $formulaire->handleRequest($request);
 
-        return $this->render('default/contact.html.twig', []);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $data = $formulaire->getData();
+
+            $session->set('contact_data', $data);
+
+            return $this->redirectToRoute('app_contact_confirmation');
+        }
+
+        return $this->render('default/contact.html.twig', [
+            'vueForm' => $formulaire->createView()
+        ]);
     }
+
+    #[Route('/contact/confirmation', name: 'app_contact_confirmation')]
+    public function contactConfirmation(SessionInterface $session): Response
+    {
+        $data = $session->get('contact_data', []);
+
+        return $this->render('default/contact-confirmation.html.twig', [
+            'nom' => $data['Nom'] ?? '',
+            'email' => $data['Email'] ?? '',
+            'message' => $data['Message'] ?? ''
+        ]);
+    }
+
 
     private function underConstruction(): Response
     {

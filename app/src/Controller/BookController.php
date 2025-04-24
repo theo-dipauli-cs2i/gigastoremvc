@@ -50,7 +50,7 @@ final class BookController extends AbstractController
             $em->persist($commentaire);
             $em->flush();
             return $this->redirectToRoute('app_detail_livre', ['id' => $id]);
-    }
+        }
 
         return $this->render('book/book-detail.html.twig', [
             'livre' => $livre,
